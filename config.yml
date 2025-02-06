@@ -1,0 +1,15 @@
+ultrasound:
+  empty: 100
+  full: 0
+volumetric:
+  length: 200
+  height: 100
+  deep: 100
+camera:
+  total_photo: 3
+watertank:
+  coverage: 80
+set_active: true
+reschedule_hours:
+  normal: 24
+  error: 2

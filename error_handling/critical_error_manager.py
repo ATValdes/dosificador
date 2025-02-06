@@ -1,0 +1,2 @@
+class CritricalErrorManager:
+    pass
