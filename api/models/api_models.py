@@ -26,3 +26,8 @@ class ConfigModel(BaseModel):
     watertank: WatertankModel = WatertankModel()
     set_active: bool = None
     reschedule_hours: RescheduleHoursModel = RescheduleHoursModel()
+
+
+class RunJobModel(BaseModel):
+    script: str
+    minutes: int

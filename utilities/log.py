@@ -30,9 +30,8 @@ class Log:
             fileHandler = FileHandler()
             fileHandler.write_log_pictures_count(numero_fotos=0)
             fileHandler.delete_files("/home/pi/Desktop/dosificador/log_data/last_month_photos")
-            fileHandler.cody_files("/home/pi/Desktop/dosificador/photos", "/home/pi/Desktop/dosificador/log_data/last_month_photos")
+            fileHandler.copy_files("/home/pi/Desktop/dosificador/photos", "/home/pi/Desktop/dosificador/log_data/last_month_photos")
             fileHandler.delete_files("/home/pi/Desktop/dosificador/photos")
-        
         
 
 if __name__ == '__main__':

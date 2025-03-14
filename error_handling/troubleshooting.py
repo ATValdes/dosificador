@@ -1,12 +1,13 @@
 import time
-from error_handling.errors import NotEnoughWater, CapturingDistanceError
+from error_handling.errors import NotEnoughWater, CapturingDistanceError, DosifyNotWorking
+from core.dosificador import dosificar
 
 class ErrorHandler:
 	def __init__(self, logger, config):
 		self.logger = logger.logger
 		self.config = config
 
-	def handle_sensor_errors(self, sensor, retries=3, delay=2):
+	def handle_sensor_errors(self, sensor, retries=3, delay=60):
 		for attempt in range(retries):
 
 			try:
@@ -27,7 +28,7 @@ class ErrorHandler:
 		self.logger.error("Cantidad de intentos consumida, no se continuara con la dosificacion")
 		return None
 
-	def handle_image_errors(self, camera, analizador, retries=3, delay=2):
+	def handle_image_errors(self, camera, analizador, retries=3, delay=60):
 		if camera.camera is None:
 			self.logger.error("No se puede acceder a la camara. El recurso ya esta en uso o tiene un error.")
 			return None
@@ -53,6 +54,27 @@ class ErrorHandler:
 				print("Error analizando imagen")
 				time.sleep(delay)
 
+		self.logger.error("Cantidad de intentos consumida, no se continuara con la dosificacion")
+		return None
+
+	def handle_dosification_errors(self, resultado_analisis, camara, analizador, covertura_objetivo,
+								tiempo=10, rango_error=0.1, retries=3, delay=60):
+		for attempt in range(retries):
+			try:
+				dosificar(self, resultado_analisis, camara, analizador, covertura_objetivo, tiempo, rango_error)
+				self.logger.info("Dosifiacion completada con exito")
+				return True
+			except DosifyNotWorking as e:
+				self.logger.error(f"Intento {attempt}: No aumenta el porcentaje de covertura cuando se activa el motor")
+				tiempo = e.time
+				print("Error al dosificar")
+				time.sleep(delay)
+			except Exception as e:
+				self.logger.error(f"Intento {attempt}: Un error impidio que se pudiera realizar la dosificacion con exito")
+				tiempo = e.time
+				print("Error generico al dosificar")
+				time.sleep(delay)
+			
 		self.logger.error("Cantidad de intentos consumida, no se continuara con la dosificacion")
 		return None
 	

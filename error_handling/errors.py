@@ -8,3 +8,8 @@ class CapturingDistanceError(Exception):
 	def __init__(self, distance, message="Error al medir el la distacia al agua. Distancia negativa o demasiado cerca del sensor"):
 		self.distance = distance
 		super().__init__(message)
+
+class DosifyNotWorking(Exception):
+	def __init__(self, time, message="No se detectó un incremento en la cobertura. Revisar el sistema."):
+		self.time = time
+		super().__init__(message)

@@ -7,7 +7,6 @@ class SendInfo:
     def send_error(self, last_messages:int, camera, sensor):
         fileHandler = FileHandler()
         log = fileHandler.read_log()
-        print(log)
         photos_path = fileHandler.photos
         res_log = []
         images = {}
@@ -16,12 +15,10 @@ class SendInfo:
         else:
             count = len(log)
         for number in range(count-1, -1, -1):
-            print(number)
             position = len(log)-1 - number
             log_data = log[position]
             photo = log_data.split(" ")[-1]
             photo = photo.strip("\n")
-            print(photo)
             if ".jpg" in photo or ".png" in photo:
                 with open(f"{photos_path}/{photo}", 'rb') as file:
                     img_data = base64.b64encode(file.read()).decode("utf-8")

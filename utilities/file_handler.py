@@ -12,7 +12,6 @@ class FileHandler:
     def read_log_pictures_count(self):
         with open(self.log_pictures_count, 'r') as file:
             numero_fotos = file.readline()
-            print(f"Se abrio el archivo: {numero_fotos}")
         if numero_fotos:
             return int(numero_fotos)
         return 0
@@ -27,7 +26,8 @@ class FileHandler:
             return yaml.safe_load(file)
 
     def write_config(self, data):
-        with open(self.config, 'r') as file:
+        print(data)
+        with open(self.config, 'w') as file:
             yaml.dump(data, file, default_flow_style=False)
         return 1
 
@@ -41,7 +41,7 @@ class FileHandler:
         print(resultado)
         return resultado
 
-    def cody_files(self, source_folder: str, dst_folder: str):
+    def copy_files(self, source_folder: str, dst_folder: str):
         if not os.path.exists(dst_folder):
            os.makedirs(dst_folder)
         for filename in os.listdir(source_folder):
@@ -50,6 +50,8 @@ class FileHandler:
             shutil.copy(file_path_src, file_path_dst)
 
     def delete_files(self, folder: str):
+        if not os.path.exists(folder):
+           os.makedirs(folder)
         for filename in os.listdir(folder):
             file_path = os.path.join(folder, filename)
             try:

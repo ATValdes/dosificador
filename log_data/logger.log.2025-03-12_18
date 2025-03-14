@@ -1,0 +1,4 @@
+ERROR - 2025-03-12 18:37:06,584 - Intento 0: Error al medir la distancia al agua. La distancia tomada fue 5.049765110015869. Es demasiado cerca de sensor o se tomo una medida negativa.
+ERROR - 2025-03-12 18:38:06,648 - Intento 1: Error al medir la distancia al agua. La distancia tomada fue 5.033409595489502. Es demasiado cerca de sensor o se tomo una medida negativa.
+ERROR - 2025-03-12 18:39:06,683 - Intento 2: Error al medir la distancia al agua. La distancia tomada fue 5.0415873527526855. Es demasiado cerca de sensor o se tomo una medida negativa.
+ERROR - 2025-03-12 18:40:06,744 - Cantidad de intentos consumida, no se continuara con la dosificacion
